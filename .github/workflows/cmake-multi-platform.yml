@@ -1,0 +1,18 @@
+name: Build XMRig
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install dependencies
+      run: sudo apt-get update && sudo apt-get install -y git build-essential cmake libuv1-dev libssl-dev libhwloc-dev
+    - name: Compile XMRig
+      run: |
+        mkdir xmrig/build
+        cd xmrig/build
+        cmake ..
+        make
